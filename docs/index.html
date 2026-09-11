@@ -25,7 +25,7 @@
     .tooltip::before{ content:""; position:absolute; bottom:calc(100% + 2px); left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color:var(--io-text); opacity:0; transition:opacity .15s; }
     .tooltip:hover::after,.tooltip:focus::after,.tooltip:hover::before,.tooltip:focus::before{ opacity:1; }
     .actions{ margin-top:26px; display:flex; align-items:center; gap:14px; }
-    button[type="submit"]{ display:inline-flex; align-items:center; gap:8px; padding:14px 22px; font-family:inherit; font-weight:700; font-size:1em; color:var(--io-white); background:var(--io-primary); border:none; border-radius:9999px; cursor:pointer; transition:background .18s, box-shadow .18s, transform .18s; }
+    button[type="submit"]{ display:inline-flex; align-items:center; gap:8px; padding:14px 22px; font-family:inherit; font-weight:700; font-size:1em; color: var(--io-white); background:var(--io-primary); border:none; border-radius:9999px; cursor:pointer; transition:background .18s, box-shadow .18s, transform .18s; }
     button[type="submit"]::after{ content:"→"; transition: transform .18s; }
     button[type="submit"]:hover, button[type="submit"]:focus { background:var(--io-primary-hover); box-shadow:0 6px 24px var(--io-primary-15); outline:none; }
     button[type="submit"].loading{ opacity:.8; pointer-events:none; }
@@ -41,8 +41,9 @@
     <h1>Client Feedback</h1>
     <p class="sub">We appreciate your feedback about our colleague and the assignment.</p>
 
-    <!-- Variant marker -->
+    <!-- Variant marker and secret -->
     <input type="hidden" name="form_variant" value="external">
+    <input type="hidden" name="shared_secret" value="6c8e5f3d2a9b47c1e0f4a7d3c9b28e1601fdd1a5a0c3e7b69fb24c5d8132e7a4">
 
     <label>Your name <span class="required">*</span></label>
     <input name="gever_naam" type="text" placeholder="First Last" required>
