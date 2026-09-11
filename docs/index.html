@@ -1,0 +1,136 @@
+<!-- iO PDM – Client Feedback Form (external) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iO PDM · Client Feedback Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+    :root { --io-primary:#365fd9; --io-primary-15:rgba(54,95,217,0.15); --io-primary-hover:#2a4bb8; --io-text:#2b2b2b; --io-bg:#f5f3ef; --io-white:#ffffff; --io-border:#e8e8e8; --io-error:#d94040; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Manrope', system-ui, -apple-system, Segoe UI, sans-serif; font-weight: 400; line-height: 1.65; color: var(--io-text); background: var(--io-bg); margin: 0; padding: 2em 1em; }
+    #feedbackClient { max-width: 680px; margin: 0 auto; padding: 40px 32px; background: var(--io-white); border-radius: 16px; box-shadow: 0 4px 24px rgba(43,43,43,0.06); }
+    h1 { font-weight: 800; font-size: 1.75em; letter-spacing: -0.02em; color: var(--io-text); margin: 0 0 6px 0; }
+    p.sub { margin: 0 0 28px 0; color: #6a6a6a; }
+    label { display: block; margin: 22px 0 8px; font-weight: 600; font-size: .95em; color: var(--io-text); }
+    select, input, textarea { width: 100%; padding: 12px 14px; font-family: inherit; font-size: 1em; color: var(--io-text); background: var(--io-white); border: 1.5px solid var(--io-border); border-radius: 8px; transition: border-color .18s, box-shadow .18s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--io-primary); box-shadow: 0 0 0 4px var(--io-primary-15); }
+    textarea { resize: vertical; min-height: 72px; }
+    .required { color: var(--io-error); font-weight: 700; margin-left: 2px; }
+    .tooltip{ position:relative; display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; margin-left:6px; border-radius:50%; background:var(--io-border); color:var(--io-text); font-size:.78em; font-weight:700; text-decoration:none; cursor:help; vertical-align:middle; }
+    .tooltip:hover,.tooltip:focus{ background:var(--io-primary); color:var(--io-white); outline:none; }
+    .tooltip::after{ content:attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); min-width:220px; max-width:320px; padding:10px 12px; background:var(--io-text); color:var(--io-white); font-size:.85em; font-weight:400; line-height:1.5; border-radius:6px; box-shadow:0 6px 20px rgba(0,0,0,.15); opacity:0; pointer-events:none; transition:opacity .15s; z-index:10; white-space:normal; text-align:left; }
+    .tooltip::before{ content:""; position:absolute; bottom:calc(100% + 2px); left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color:var(--io-text); opacity:0; transition:opacity .15s; }
+    .tooltip:hover::after,.tooltip:focus::after,.tooltip:hover::before,.tooltip:focus::before{ opacity:1; }
+    .actions{ margin-top:26px; display:flex; align-items:center; gap:14px; }
+    button[type="submit"]{ display:inline-flex; align-items:center; gap:8px; padding:14px 22px; font-family:inherit; font-weight:700; font-size:1em; color:var(--io-white); background:var(--io-primary); border:none; border-radius:9999px; cursor:pointer; transition:background .18s, box-shadow .18s, transform .18s; }
+    button[type="submit"]::after{ content:"→"; transition: transform .18s; }
+    button[type="submit"]:hover, button[type="submit"]:focus { background:var(--io-primary-hover); box-shadow:0 6px 24px var(--io-primary-15); outline:none; }
+    button[type="submit"].loading{ opacity:.8; pointer-events:none; }
+    button[type="submit"].loading::after{ content:"⏳"; transform:none; }
+    .msg{ display:none; padding:12px 14px; border-radius:8px; font-weight:600; }
+    .msg.ok{ background:#e4f3e1; color:#135c29; }
+    .msg.err{ background:#fde8e8; color:#7a1e1e; }
+    .msg.show{ display:block; }
+    #thanks{ display:none; padding:1em; background:#e4f3e1; border-radius:8px; margin:2em 0 0; text-align:center; }
+    footer{ max-width:680px; margin:16px auto 0; color:#6a6a6a; font-size:.9em; }
+    @media (max-width:600px){ #feedbackClient{ padding:24px 16px; } h1{ font-size:1.5em; } }
+  </style>
+</head>
+<body>
+  <form id="feedbackClient" novalidate>
+    <h1>Client Feedback Form</h1>
+    <p class="sub">This form securely sends your feedback to the iO People Development workflow.</p>
+
+    <input type="hidden" name="gever_rol" value="Klant">
+    <input type="hidden" name="shared_secret" value="6c8e5f3d2a9b47c1e0f4a7d3c9b28e1601fdd1a5a0c3e7b69fb24c5d8132e7a4">
+
+    <label for="coachee_naam">Who are you giving feedback about? (Full name of colleague/receiver) <span class="required">*</span></label>
+    <input type="text" name="coachee_naam" id="coachee_naam" required autocomplete="off" placeholder="Full name of colleague">
+
+    <label>Your name <span class="required">*</span></label>
+    <input type="text" name="gever_naam" required autocomplete="off" placeholder="Your full name">
+
+    <label>Date of feedback (optional)</label>
+    <input type="date" name="datum_feedback">
+
+    <label>Expectations <a class="tooltip" tabindex="0" aria-label="More info" data-tip="Did the employee meet the agreed goals and expectations for this role or assignment?">i</a></label>
+    <textarea name="Expectations" rows="2"></textarea>
+
+    <label>Competence <a class="tooltip" tabindex="0" aria-label="More info" data-tip="Assess the knowledge and skills (soft skills and expertise) the employee brings to this work.">i</a></label>
+    <textarea name="Competence" rows="2"></textarea>
+
+    <label>Performance <a class="tooltip" tabindex="0" aria-label="More info" data-tip="How does the employee perform in terms of output, approach, and teamwork, measured against goals?">i</a></label>
+    <textarea name="Performance" rows="2"></textarea>
+
+    <label>Potential <a class="tooltip" tabindex="0" aria-label="More info" data-tip="Do you see growth potential (Bloom · High · Medium · Low)? If yes, towards which role or level?">i</a></label>
+    <textarea name="Potential" rows="2"></textarea>
+
+    <label>Overall assessment <a class="tooltip" tabindex="0" aria-label="More info" data-tip="Overall summary score on the scale Outstanding · Very Good · Good · Needs Improvement · Poor.">i</a></label>
+    <select name="overall_score">
+      <option value="">-- Select --</option>
+      <option>Poor</option>
+      <option>Needs Improvement</option>
+      <option>Good</option>
+      <option>Very Good</option>
+      <option>Outstanding</option>
+    </select>
+
+    <label>Additional feedback (free format) <a class="tooltip" tabindex="0" aria-label="More info" data-tip="Anything else you want to share about the assignment, cooperation, or growth.">i</a><br><span class="small">Anything else you want to mention? (multiple points possible)</span></label>
+    <textarea name="free_format" rows="3"></textarea>
+
+    <div class="actions">
+      <button type="submit" id="submitBtn">Submit feedback</button>
+      <span id="status" aria-live="polite" class="small"></span>
+    </div>
+    <div id="msgOk" class="msg ok" role="status">Thank you! Your feedback was received securely.</div>
+    <div id="msgErr" class="msg err" role="alert">Submission failed. Please try again later or contact your iO contact person.</div>
+  </form>
+
+  <footer>Privacy: this submission is sent via a secure webhook to iO n8n and processed for People Development. No cookies are used.</footer>
+
+  <script>
+    const WEBHOOK_URL = 'https://workflows.iobonzai.com/webhook/pdm-feedback-intake';
+
+    function getParam(n){ return new URLSearchParams(window.location.search).get(n) || ''; }
+    const cn = document.getElementsByName('coachee_naam')[0];
+    const prefill = getParam('coachee');
+    if (prefill) cn.value = prefill;
+
+    const form = document.getElementById('feedbackClient');
+    const btn = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('status');
+    const okEl = document.getElementById('msgOk');
+    const errEl = document.getElementById('msgErr');
+
+    function formToJSON(frm){
+      const fd = new FormData(frm); const obj = {};
+      fd.forEach((v,k)=>{ if (obj[k]) { if (!Array.isArray(obj[k])) obj[k] = [obj[k]]; obj[k].push(v); } else obj[k]=v; });
+      obj._meta = { form_variant: 'external', page_url: location.href, user_agent: navigator.userAgent };
+      return obj;
+    }
+    function setLoading(on){
+      if (on) { btn.classList.add('loading'); btn.disabled = true; statusEl.textContent = 'Sending…'; }
+      else { btn.classList.remove('loading'); btn.disabled = false; statusEl.textContent = ''; }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      okEl.classList.remove('show'); errEl.classList.remove('show');
+      const naamField = form.querySelector('input[name="gever_naam"]');
+      if (!naamField.value.trim()) { alert('Please enter your name.'); naamField.focus(); return; }
+      const payload = formToJSON(form);
+      setLoading(true);
+      try {
+        const res = await fetch(WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload), mode:'cors', credentials:'omit' });
+        if (!res.ok) throw new Error('HTTP '+res.status);
+        form.reset(); okEl.classList.add('show');
+      } catch (err) {
+        console.error('Submit error', err); errEl.classList.add('show');
+      } finally { setLoading(false); }
+    });
+  </script>
+</body>
+</html>
